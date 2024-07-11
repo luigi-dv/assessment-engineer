@@ -1,0 +1,35 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore environment and local files
+.env
+.env.*
+
+# Ignore node_modules for Node.js dependencies
+node_modules/
+
+# Ignore compiled Python files
+*.pyo
+
+# Ignore IDE/Editor-specific files
+.vscode/
+.idea/
+
+# Ignore npm debug log
+npm-debug.log
+
+# Ignore log files
+*.log
+
+# Ignore generated build files for React
+/build/
+
+# Ignore package-lock.json for npm
+package-lock.json
+
+# Ignore Mac specific files
+.DS_Store
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
