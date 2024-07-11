@@ -6,6 +6,7 @@ __author__ = "luigelo@ldvloper.com"
 from fastapi import FastAPI
 from src.service_config import serviceConfig
 from fastapi.openapi.utils import get_openapi
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def get_application() -> FastAPI:
@@ -22,6 +23,19 @@ def __initialize_application() -> FastAPI:
         title=serviceConfig.SERVICE_NAME,
         description=serviceConfig.SERVICE_DESCRIPTION,
         version=serviceConfig.SERVICE_VERSION,
+    )
+    origins = [
+        "http://localhost",
+        "http://localhost:3000",
+        serviceConfig.APP_CONSUMER_ORIGIN
+    ]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
     # Return FastAPI
     return app

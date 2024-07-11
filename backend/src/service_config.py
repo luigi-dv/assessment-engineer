@@ -31,7 +31,7 @@ class ServiceConfig(BaseSettings, object):
     )
     MONGO_INITDB_CONNECTION_STRING: str = ""
     # CORS
-    APP_CONSUMER_ORIGIN: str = Field(default="", env="APP_CONSUMER_ORIGIN")
+    APP_CONSUMER_ORIGIN: str = Field(default="http://localhost:3000", env="APP_CONSUMER_ORIGIN")
 
     @field_validator("MONGO_INITDB_CONNECTION_STRING", check_fields=True)
     def generate_mongo_connection_string(cls, v, values):
