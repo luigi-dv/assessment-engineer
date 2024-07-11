@@ -1,0 +1,18 @@
+# This requirements file lists all third-party dependencies for this project.
+# Run 'pip install -r requirements.txt'
+
+
+# Core dependencies
+wheel
+uvicorn[standard]
+python-multipart
+# FastAPI dependencies
+fastapi
+pydantic
+pydantic-settings
+pymongo[srv]
+# Security dependencies
+passlib[bcrypt]
+python-jose[cryptography]
+# Code Formatting
+black[d]
