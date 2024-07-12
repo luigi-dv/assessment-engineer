@@ -1,1 +1,0 @@
-export { VoteDialog } from "./VoteDialog";

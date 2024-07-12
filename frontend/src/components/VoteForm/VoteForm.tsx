@@ -1,28 +1,47 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "src/components/ui/card";
 import { Input } from "src/components/ui/input";
 import { Label } from "src/components/ui/label";
+import { cn } from "src/utilities/cn";
+import { Button } from "src/components/ui/button";
+import * as React from "react";
+import { useVoteForm } from "src/hooks/useVoteForm";
+import { VoteCombobox } from "src/components/VoteCombobox";
 
-export const VoteForm = () => {
+const hardCodedOptions = [
+  {
+    label: "React",
+    value: "react",
+  },
+  {
+    label: "Vue",
+    value: "vue",
+  },
+  {
+    label: "Angular",
+    value: "angular",
+  },
+];
+
+export const VoteForm = ({ className }: React.ComponentProps<"form">) => {
+  const { form, handleChange } = useVoteForm({
+    username: "",
+    voteId: "",
+  });
+
   return (
-    <div className="grid gap-6">
-      <div className="grid gap-3">
-        <Label htmlFor="name">Name</Label>
+    <form className={cn("grid items-start gap-4", className)}>
+      <div className="grid gap-2">
+        <Label htmlFor="username">Username</Label>
         <Input
-          id="name"
-          type="text"
-          className="w-full"
-          defaultValue="Gamer Gear Pro Controller"
+          id="username"
+          name="username"
+          value={form.username}
+          onChange={handleChange}
         />
       </div>
-      <div className="grid gap-3">
-        <Label htmlFor="description">Description</Label>
+      <div className="grid gap-2">
+        <VoteCombobox options={hardCodedOptions} />
       </div>
-    </div>
+      <Button type="submit">Send Vote</Button>
+    </form>
   );
 };

@@ -2,7 +2,7 @@ import { Button } from "src/components/ui/button";
 import { Card, CardContent, CardHeader } from "src/components/ui/card";
 import { SVGProps } from "react";
 import { usePolls } from "src/hooks/usePolls";
-import { VoteDialog } from "src/components/VoteDialog";
+import { VoteDrawerDialog } from "src/components/VoteDrawerDialog";
 
 export const HomePage = () => {
   const { polls, loading } = usePolls(true);
@@ -35,7 +35,7 @@ export const HomePage = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="flex justify-center py-4">
-                  <VoteDialog pollId={poll._id} />
+                  <VoteDrawerDialog />
                 </CardContent>
               </Card>
             ))}
