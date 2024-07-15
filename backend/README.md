@@ -37,7 +37,7 @@ You can also run the application using Docker.
 
 ```bash
 # Build the image
-docker build -t assesment-enginee:latest .
+docker build -t assesment-engineer:latest .
 # Run the container
 docker run -p 8000:8000 assesment-engineer:latest
 # Run the container in detached mode
