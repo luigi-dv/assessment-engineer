@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: List backend directory files
+      run: ls -al backend
     - name: Build the Docker image for Assessment Engineer Services
       run: docker build . --file backend/Dockerfile --tag assessment-engineer:$(date +%s)
