@@ -1,5 +1,7 @@
 # Polling App Solution Repository
 
+[![Polling App Image](https://github.com/luigi-dv/assessment-engineer/actions/workflows/docker-image.yml/badge.svg)](https://github.com/luigi-dv/assessment-engineer/actions/workflows/docker-image.yml)
+
 This repository contains the solution for the Polling App assessment.
 
 ## Requirements
