@@ -33,7 +33,7 @@ uvicorn main:app --reload
 
 ### Docker
 
-You can also run the application using Docker.
+You can also run the service from the root directory using Docker.
 
 ```bash
 # Build the image

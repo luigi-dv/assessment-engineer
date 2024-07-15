@@ -61,6 +61,19 @@ To get started with the Polling App solution, follow these steps:
    
    The React development server should now be running at http://localhost:3000.
 
+## Running with Docker
+
+   You can also run the backend service using Docker.
+   
+   ```bash
+   # Build the image
+   docker build -t assesment-engineer:latest .
+   # Run the container
+   docker run -p 8000:8000 assesment-engineer:latest
+   # Run the container in detached mode
+   docker run -d -p 8000:8000 assesment-enginer:latest
+   ```
+
 ## Usage
 
 Open your web browser and go to http://localhost:3000 to access the Polling App.

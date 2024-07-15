@@ -7,7 +7,7 @@ LABEL authors="Luigi Davila"
 WORKDIR /app
 
 # Copy the requirements file into the builder stage
-COPY requirements.txt .
+COPY backend/requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -25,10 +25,10 @@ WORKDIR /home/app
 COPY --from=builder /usr/local /usr/local
 
 # Copy the source code into the runtime stage
-COPY --chown=app:app src /home/app/src
-COPY --chown=app:app main.py /home/app/main.py
-COPY --chown=app:app .env /home/app/.env
-COPY --chown=app:app entrypoint.sh /home/app/entrypoint.sh
+COPY --chown=app:app backend/src /home/app/src
+COPY --chown=app:app backend/main.py /home/app/main.py
+COPY --chown=app:app backend/.env /home/app/.env
+COPY --chown=app:app backend/entrypoint.sh /home/app/entrypoint.sh
 
 # Change script permissions
 RUN chmod +x /home/app/entrypoint.sh
