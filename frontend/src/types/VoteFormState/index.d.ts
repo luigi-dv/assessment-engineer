@@ -1,4 +1,5 @@
 export interface VoteFormState {
+  pollId: string;
   username: string;
-  voteId: string;
+  vote: string;
 }

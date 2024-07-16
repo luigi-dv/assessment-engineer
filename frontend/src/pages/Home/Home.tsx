@@ -1,67 +1,74 @@
-import { Button } from "src/components/ui/button";
-import { Card, CardContent, CardHeader } from "src/components/ui/card";
+import {
+  Card,
+  CardTitle,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardDescription,
+} from "src/components/ui/card";
 import { SVGProps } from "react";
 import { usePolls } from "src/hooks/usePolls";
-import { VoteDrawerDialog } from "src/components/VoteDrawerDialog";
+import { Skeleton } from "src/components/ui/skeleton";
+import { ScrollArea } from "src/components/ui/scroll-area";
+import { PollPreview } from "src/components/PollPreview";
+import { Button } from "src/components/ui/button";
+import { PlusIcon, VoteIcon } from "lucide-react";
+import { NewPollDialog } from "../../components/NewPollDialog";
 
 export const HomePage = () => {
-  const { polls, loading } = usePolls(true);
+  const { polls, loading } = usePolls();
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="text-gray-900 dark:text-gray-300 py-4 px-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Polling App</h1>
-        <Button variant="ghost" size="icon" className="rounded-full">
-          <PlusIcon className="w-6 h-6" />
-          <span className="sr-only">Create Poll</span>
-        </Button>
-      </header>
       <main className="flex-1 py-8 px-6">
         <section>
           <h2 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-400">
             Active Polls
           </h2>
-          <div className="grid gap-4">
-            {polls.map((poll) => (
-              <Card key={poll._id}>
-                <CardHeader className="flex items-center justify-between">
-                  <h3 className="text-lg font-medium">{poll.question}</h3>
-                  <div className="text-muted-foreground">
-                    <span className="font-medium">
-                      {poll.votes && poll.votes.length
-                        ? poll.votes.length
-                        : "No"}
-                    </span>{" "}
-                    Votes
-                  </div>
-                </CardHeader>
-                <CardContent className="flex justify-center py-4">
-                  <VoteDrawerDialog />
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <ScrollArea className="h-screen">
+            <div className="grid grid-cols-3 gap-4">
+              {loading && (
+                <Card>
+                  <CardHeader className="flex items-center justify-between">
+                    <Skeleton className="h-6 w-[450px] bg-gray-200" />
+                  </CardHeader>
+                  <CardContent className="flex justify-center py-4">
+                    <Skeleton className="h-4 w-[250px] bg-gray-200" />
+                  </CardContent>
+                </Card>
+              )}
+              {!loading && (
+                <>
+                  <Card className="bg-gray-100">
+                    <CardHeader className="flex items-center justify-between">
+                      <CardTitle>Create New Poll</CardTitle>
+                      <CardDescription>
+                        Start a new poll to gather feedback from your audience
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex justify-center py-4">
+                      <div className="flex flex-col items-center gap-2">
+                        <VoteIcon className="h-16 w-16 text-secondary-foreground" />
+                        <div className="text-2xl font-light text-primary">
+                          Create another poll
+                        </div>
+                        <div>
+                          Check what people think about different topics
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter>
+                      <NewPollDialog />
+                    </CardFooter>
+                  </Card>
+                  {polls.map((poll) => (
+                    <PollPreview key={poll._id} poll={poll} />
+                  ))}
+                </>
+              )}
+            </div>
+          </ScrollArea>
         </section>
       </main>
     </div>
   );
 };
-
-function PlusIcon(props: SVGProps<any>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  );
-}

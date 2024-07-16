@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 import { Poll } from "src/api/polls/types";
 import { pollsService } from "src/api/polls/pollsService";
 
-export const usePolls = () => {
-  const [polls, setPolls] = useState<Poll[]>([]);
+export const usePoll = (pollId: string) => {
+  const [poll, setPoll] = useState<Poll | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchPolls = async () => {
+    const fetchPoll = async () => {
       setLoading(true);
       try {
-        const polls = await pollsService.getPolls();
-        setPolls(polls);
+        const poll = await pollsService.getPoll(pollId, true);
+        setPoll(poll);
       } catch (error) {
         console.log(error);
       } finally {
         setLoading(false);
       }
     };
-    fetchPolls();
-  }, []);
+    fetchPoll();
+  }, [pollId]);
 
-  return { polls, loading };
+  return { poll, loading };
 };

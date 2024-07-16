@@ -1,5 +1,5 @@
-export interface Option {
+export type Option = {
   _id: string;
-  pollId: string;
-  optionValue: string;
-}
+  poll_id: string;
+  option_value: string;
+};

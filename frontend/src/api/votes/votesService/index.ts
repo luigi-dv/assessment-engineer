@@ -22,6 +22,9 @@ export const votesService = {
    */
   async getVote(id: string): Promise<Vote> {
     const response = await fetch(`${API_URL}/${VOTE_ENDPOINT}/${id}`);
+    if (!response.ok) {
+      throw new Error("Error fetching vote");
+    }
     return response.json();
   },
 
@@ -31,6 +34,9 @@ export const votesService = {
 
   async getVotes(): Promise<Vote[]> {
     const response = await fetch(`${API_URL}/${VOTE_ENDPOINT}`);
+    if (!response.ok) {
+      throw new Error("Error fetching votes");
+    }
     return response.json();
   },
 
@@ -39,6 +45,9 @@ export const votesService = {
    */
   async getVotesForPoll(pollId: string): Promise<Vote[]> {
     const response = await fetch(`${API_URL}/${VOTE_ENDPOINT}/poll/${pollId}`);
+    if (!response.ok) {
+      throw new Error("Error fetching votes for poll");
+    }
     return response.json();
   },
 
@@ -49,6 +58,9 @@ export const votesService = {
     const response = await fetch(`${API_URL}/${VOTE_ENDPOINT}/${id}`, {
       method: "DELETE",
     });
+    if (!response.ok) {
+      throw new Error("Error deleting vote");
+    }
     return response.json();
   },
 };

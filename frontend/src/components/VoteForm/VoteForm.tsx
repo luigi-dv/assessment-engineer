@@ -1,34 +1,25 @@
+import * as React from "react";
 import { Input } from "src/components/ui/input";
 import { Label } from "src/components/ui/label";
 import { cn } from "src/utilities/cn";
 import { Button } from "src/components/ui/button";
-import * as React from "react";
 import { useVoteForm } from "src/hooks/useVoteForm";
-import { VoteCombobox } from "src/components/VoteCombobox";
+import { VoteSelect } from "src/components/VoteSelect";
+import { VoteFormProps } from "src/types/VoteFormProps";
 
-const hardCodedOptions = [
-  {
-    label: "React",
-    value: "react",
-  },
-  {
-    label: "Vue",
-    value: "vue",
-  },
-  {
-    label: "Angular",
-    value: "angular",
-  },
-];
-
-export const VoteForm = ({ className }: React.ComponentProps<"form">) => {
-  const { form, handleChange } = useVoteForm({
-    username: "",
-    voteId: "",
-  });
+export const VoteForm = ({ className, poll }: VoteFormProps) => {
+  const { form, handleChange, handleVoteSelectChange, handleSubmit } =
+    useVoteForm({
+      pollId: poll._id,
+      username: "",
+      vote: "",
+    });
 
   return (
-    <form className={cn("grid items-start gap-4", className)}>
+    <form
+      onSubmit={handleSubmit}
+      className={cn("grid items-start gap-4", className)}
+    >
       <div className="grid gap-2">
         <Label htmlFor="username">Username</Label>
         <Input
@@ -36,11 +27,21 @@ export const VoteForm = ({ className }: React.ComponentProps<"form">) => {
           name="username"
           value={form.username}
           onChange={handleChange}
+          required
         />
       </div>
-      <div className="grid gap-2">
-        <VoteCombobox options={hardCodedOptions} />
-      </div>
+      {poll.options && (
+        <div className="grid gap-2">
+          <VoteSelect
+            name="vote"
+            title={poll.question}
+            placeholder={poll.question}
+            value={form.vote}
+            handleChange={handleVoteSelectChange}
+            options={poll.options}
+          />
+        </div>
+      )}
       <Button type="submit">Send Vote</Button>
     </form>
   );

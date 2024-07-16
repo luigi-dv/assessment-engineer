@@ -1,3 +1,4 @@
+from uuid import UUID
 from fastapi import HTTPException
 from pymongo.errors import DuplicateKeyError
 from src.module.domain.entities.poll.poll_entity import Poll
@@ -25,7 +26,7 @@ class PollRepository(IPollRepository):
             )
 
     async def find_by_id(self, poll_id: str) -> Poll:
-        document = self.collection.find_one({"_id": poll_id})
+        document = self.collection.find_one({"_id": UUID(poll_id)})
         if document:
             return Poll(**document)
         else:

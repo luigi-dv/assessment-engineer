@@ -1,3 +1,4 @@
+from uuid import UUID
 from fastapi import HTTPException
 from pymongo.errors import DuplicateKeyError
 from src.module.domain.entities.poll.option_entity import Option
@@ -27,7 +28,7 @@ class OptionRepository(IOptionRepository):
             )
 
     async def find_by_id(self, option_id: str) -> Option:
-        document = self.collection.find_one({"_id": option_id})
+        document = self.collection.find_one({"_id": UUID(option_id)})
         if document:
             return Option(**document)
         else:

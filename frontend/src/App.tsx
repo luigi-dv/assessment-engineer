@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { HomePage } from "src/pages/Home";
 import { NotFoundPage } from "src/pages/NotFound";
 import { MainLayout } from "src/layouts/MainLayout";
+import { Toaster } from "sonner";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+      <Toaster />
     </div>
   );
 }
